@@ -54,7 +54,7 @@ public class QuoteServiceBean implements QuoteService {
         }
 
         QuoteResponse quoteResponse = this.restTemplate.getForObject(
-                "http://quotes.rest/qod.json?category={cat}",
+                "http://quotes.rest/qod.json?category=funny",
                 QuoteResponse.class, quoteCategory);
 
         Quote quote = quoteResponse.getQuote();

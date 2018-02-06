@@ -1,6 +1,8 @@
 package org.springboot.resttemplate.tss;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +25,8 @@ public class QuoteController  {
     /**
      * The QuoteService business service.
      */
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private QuoteService quoteService;
 
@@ -42,14 +46,14 @@ public class QuoteController  {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Quote> getQuoteOfTheDay() {
-       // logger.info("> getQuoteOfTheDay");
+       logger.info("> getQuoteOfTheDay");
 
         Quote quote = quoteService.getDaily(QuoteService.CATEGORY_INSPIRATIONAL);
 
         if (quote == null) {
             return new ResponseEntity<Quote>(HttpStatus.NOT_FOUND);
         }
-      //  logger.info("< getQuoteOfTheDay");
+        logger.info("< getQuoteOfTheDay");
         return new ResponseEntity<Quote>(quote, HttpStatus.OK);
     }
 
