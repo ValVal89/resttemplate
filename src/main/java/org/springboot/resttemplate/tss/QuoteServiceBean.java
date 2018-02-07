@@ -54,10 +54,15 @@ public class QuoteServiceBean implements QuoteService {
         }
 
         QuoteResponse quoteResponse = this.restTemplate.getForObject(
-                "http://quotes.rest/qod.json?category=funny",
+                "http://quotes.rest/qod.json?category=love",
                 QuoteResponse.class, quoteCategory);
 
         Quote quote = quoteResponse.getQuote();
+
+        String qouteCategory = quote.getCategory();
+        logger.info("qouteCategory = " + qouteCategory);
+        String qouteTitle= quote.getTitle();
+        logger.info("qouteTitle = " + qouteTitle);
 
         logger.info("< getDaily");
         return quote;
